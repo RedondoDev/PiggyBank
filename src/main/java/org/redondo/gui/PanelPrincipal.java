@@ -221,8 +221,28 @@ public class PanelPrincipal extends JFrame {
 
 		private JPanel crearPanel2() {
 			JPanel p = new JPanel();
+			p.setLayout(null);
+			p.setBounds(0,0,getWidth(),getHeight());
+			p.setBackground(Color.BLUE);
+			JLabel textoIngresos = crearLabel("Ingresos: 1600€", 20);
+			textoIngresos.setBounds(100,50,200,30);
+			JLabel textoGastos = crearLabel("Gastos: 1000€", 20);
+			textoGastos.setBounds(100,110,200,30);
+			JLabel textoMes = crearLabel("Septiembre", 26);
+			textoMes.setBounds(120,220,150,30);
+			p.add(textoIngresos);
+			p.add(textoGastos);
+			p.add(textoMes);
 			p.setOpaque(true); // Quitar fondo luego poniéndolo false
 			return p;
+		}
+
+		private JLabel crearLabel(String palabras, int tamano) {
+			JLabel texto = new JLabel(palabras);
+			texto.setBackground(Color.RED);
+			texto.setFont(new Font("Malgun Gothic", Font.PLAIN, tamano));
+			texto.setOpaque(true);
+			return texto;
 		}
 
 		private JButton crearBoton(String texto, EscuchaRaton e) {
