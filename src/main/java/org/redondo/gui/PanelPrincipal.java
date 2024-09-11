@@ -22,7 +22,7 @@ public class PanelPrincipal extends JFrame {
 		this.setIconImage(icono.getImage());
 		this.setTitle("Piggy Bank");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(800, 600);
+		this.setSize(800, 550);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
@@ -221,8 +221,31 @@ public class PanelPrincipal extends JFrame {
 
 		private JPanel crearPanel2() {
 			JPanel p = new JPanel();
-			p.setOpaque(true); // Quitar fondo luego poniéndolo false
+			p.setLayout(null);
+			p.setBounds(0,0,getWidth(),getHeight());
+			JLabel textoIngresos = crearLabel("Ingresos: 1600€", 0, 23);	// Variables
+			textoIngresos.setBounds(100,40,200,35);
+			JLabel textoGastos = crearLabel("Gastos: 1000€", 0,23);		// Variables
+			textoGastos.setBounds(100,90,200,35);
+			JLabel textoMes = crearLabel("Septiembre", 1,28);		// Variables
+			textoMes.setBounds(105,170,170,40);
+			JLabel textoNombre = crearLabel("Javi", 0,18);		// Variables
+			textoNombre.setBounds(165,210,170,40);
+			textoNombre.setHorizontalTextPosition(SwingConstants.CENTER);
+			p.add(textoIngresos);
+			p.add(textoGastos);
+			p.add(textoMes);
+			p.add(textoNombre);
+			p.setOpaque(false);
 			return p;
+		}
+
+		private JLabel crearLabel(String palabras, int tipo, int tamano) {
+			JLabel texto = new JLabel(palabras);
+			texto.setBackground(null);
+			texto.setFont(new Font("Malgun Gothic", tipo, tamano));
+			texto.setOpaque(false);
+			return texto;
 		}
 
 		private JButton crearBoton(String texto, EscuchaRaton e) {
