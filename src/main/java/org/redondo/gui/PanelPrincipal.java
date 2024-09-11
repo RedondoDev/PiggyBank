@@ -1,14 +1,12 @@
 package org.redondo.gui;
 
 import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieSeries;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler;
-import org.redondo.bd.BaseDatos;
-import org.redondo.logica.Usuario;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -54,9 +52,9 @@ public class PanelPrincipal extends JFrame {
 		this.setVisible(true);
 	}
 
-	class MiFondo extends JPanel {
+	static class MiFondo extends JPanel {
 
-		private Image imagenFondo = new ImageIcon("src/main/resources/gradient2.png").getImage();
+		private final Image imagenFondo = new ImageIcon("src/main/resources/gradient2.png").getImage();
 
 		@Override
 		protected void paintComponent(Graphics g) {
@@ -65,24 +63,64 @@ public class PanelPrincipal extends JFrame {
 		}
 	}
 
-	class PanelGrid extends JPanel {
+	static class PanelNull extends JPanel {
+
+		ImageIcon imagenCerdito = new ImageIcon("src/main/resources/pagarImage.png");
+		JLabel cerditoPagar;
+
+		public PanelNull() {
+			this.setLayout(null);
+			this.setBounds(0, 0, 300, 300);
+			this.setOpaque(false);
+
+			Image imagenOriginal = imagenCerdito.getImage();
+			Image imagenEscalada = imagenOriginal.getScaledInstance(58, 58, Image.SCALE_SMOOTH);
+			ImageIcon imagenEscaladaIcono1 = new ImageIcon(imagenEscalada);
+			ImageIcon imagenEscaladaIcono2 = new ImageIcon(imagenOriginal.getScaledInstance(63, 63, Image.SCALE_SMOOTH));
+
+			cerditoPagar = new JLabel(imagenEscaladaIcono1);
+			cerditoPagar.setBackground(new Color(0xFDF6F2));
+			cerditoPagar.setOpaque(true);
+			cerditoPagar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			cerditoPagar.setBounds(152, 118, 64, 64);
+			cerditoPagar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("Pagar");
+				}
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					cerditoPagar.setIcon(imagenEscaladaIcono2);
+					cerditoPagar.repaint();
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					cerditoPagar.setIcon(imagenEscaladaIcono1);
+					cerditoPagar.repaint();
+				}
+			});
+
+			this.add(cerditoPagar);
+
+			this.setVisible(true);
+
+		}
+
+	}
+
+	static class PanelGrid extends JPanel {
 
 		JPanel p1, p2;
 		JButton anadirCat, borrarCat, salir;
 
 		public PanelGrid() {
 			this.setLayout(new GridLayout(2, 1, 10, 10));
-			this.setOpaque(false); // Transparente para que el fondo se vea
+			this.setOpaque(false);
 
 			p1 = crearPanel1();
 			this.add(p1);
 			p2 = crearPanel2();
 			this.add(p2);
-			//p3 = crearPanel3();
-			//this.add(p3);
-			//p4 = crearPanel4();
-			//this.add(p4);
-
 		}
 
 		class EscuchaRaton extends MouseAdapter implements FocusListener, ActionListener {
@@ -133,8 +171,6 @@ public class PanelPrincipal extends JFrame {
 				}
 			}
 
-
-
 		}
 
 		private JPanel crearPanel1() {
@@ -149,17 +185,22 @@ public class PanelPrincipal extends JFrame {
 			pie.addSeries("Ocio", 10);
 			pie.getStyler().setPlotContentSize(0.9);
 			pie.getStyler().setChartPadding(20);
-			pie.getStyler().setPlotBackgroundColor(new Color(195, 90, 90, 0)); // este poner transp
+			pie.getStyler().setPlotBackgroundColor(null);
 			pie.getStyler().setPlotBorderVisible(false);
+			pie.getStyler().setDefaultSeriesRenderStyle(PieSeries.PieSeriesRenderStyle.Donut);
+			pie.getStyler().setDonutThickness(0.6);
 			pie.getStyler().setLabelsFont(new Font("Malgun Gothic", Font.PLAIN, 12));
 			pie.getStyler().setLegendFont(new Font("Malgun Gothic", Font.PLAIN, 16));
 			pie.getStyler().setLegendPosition(Styler.LegendPosition.OutsideE);
-			pie.getStyler().setLegendBackgroundColor(new Color(255, 255, 255, 180));
-			pie.getStyler().setLegendBorderColor(new Color(255, 255, 255, 0));
+			pie.getStyler().setLegendBackgroundColor(new Color(255, 255, 255, 200));
+			pie.getStyler().setLegendBorderColor(null);
 
 			XChartPanel<PieChart> chartPanel = new XChartPanel<>(pie);
 			chartPanel.setBackground(new Color(82, 102, 218, 0));
 			chartPanel.setSize(500, 300);
+			chartPanel.setLayout(null);
+			PanelNull panelImagen = new PanelNull();
+			chartPanel.add(panelImagen);
 			p.add(chartPanel);
 
 			anadirCat = crearBoton("Añadir categoría", new EscuchaRaton());
@@ -174,7 +215,7 @@ public class PanelPrincipal extends JFrame {
 			salir.setBounds(767, 7, 24, 24);
 			p.add(salir);
 
-			p.setOpaque(false); // Quitar fondo luego poniéndolo false
+			p.setOpaque(false);
 			return p;
 		}
 
