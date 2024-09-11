@@ -128,27 +128,27 @@ public class PanelPrincipal extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (e.getSource() == anadirCat) {
-					anadirCat.setBounds(597, 117, 137, 37);
-					anadirCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
-					anadirCat.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+					anadirCat.setBounds(568, 97, 164, 47);
+					anadirCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 3));
+					anadirCat.setFont(new Font("Malgun Gothic", Font.BOLD, 18));
 				} else if (e.getSource() == borrarCat) {
-					borrarCat.setBounds(597, 167, 137, 37);
-					borrarCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
-					borrarCat.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
+					borrarCat.setBounds(568, 157, 164, 47);
+					borrarCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 3));
+					borrarCat.setFont(new Font("Malgun Gothic", Font.BOLD, 18));
 				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if (e.getSource() == anadirCat) {
-					anadirCat.setBounds(600, 120, 130, 30);
-					anadirCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR4), 2));
-					anadirCat.setFont(new Font("Malgun Gothic", Font.BOLD, 15));
+					anadirCat.setBounds(572, 100, 156, 40);
+					anadirCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
+					anadirCat.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 
 				} else if (e.getSource() == borrarCat) {
-					borrarCat.setBounds(600, 170, 130, 30);
-					borrarCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR4), 2));
-					borrarCat.setFont(new Font("Malgun Gothic", Font.BOLD, 15));
+					borrarCat.setBounds(572, 160, 156, 40);
+					borrarCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
+					borrarCat.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 				}
 			}
 
@@ -192,7 +192,7 @@ public class PanelPrincipal extends JFrame {
 			pie.getStyler().setLabelsFont(new Font("Malgun Gothic", Font.PLAIN, 12));
 			pie.getStyler().setLegendFont(new Font("Malgun Gothic", Font.PLAIN, 16));
 			pie.getStyler().setLegendPosition(Styler.LegendPosition.OutsideE);
-			pie.getStyler().setLegendBackgroundColor(new Color(255, 255, 255, 200));
+			pie.getStyler().setLegendBackgroundColor(new Color(255, 255, 255, 255));
 			pie.getStyler().setLegendBorderColor(null);
 
 			XChartPanel<PieChart> chartPanel = new XChartPanel<>(pie);
@@ -204,11 +204,11 @@ public class PanelPrincipal extends JFrame {
 			p.add(chartPanel);
 
 			anadirCat = crearBoton("Añadir categoría", new EscuchaRaton());
-			anadirCat.setBounds(600, 120, 130, 30);
+			anadirCat.setBounds(572, 100, 156, 40);
 			p.add(anadirCat);
 
 			borrarCat = crearBoton("Borrar categoría", new EscuchaRaton());
-			borrarCat.setBounds(600, 170, 130, 30);
+			borrarCat.setBounds(572, 160, 156, 40);
 			p.add(borrarCat);
 
 			salir = crearBotonSalir(new EscuchaRaton());
@@ -252,10 +252,10 @@ public class PanelPrincipal extends JFrame {
 			JButton b = new JButton(texto);
 			b.setFocusable(false);
 			b.setForeground((new Color(Inicio.COLOR1)));
-			b.setFont(new Font("Malgun Gothic", Font.BOLD, 15));
+			b.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 			b.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			b.setBackground(new Color(Inicio.COLOR4));
-			b.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR4), 2));
+			b.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
 			b.setOpaque(true);
 			b.addActionListener(e);
 			b.addMouseListener(e);
