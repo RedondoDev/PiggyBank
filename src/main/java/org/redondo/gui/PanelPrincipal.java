@@ -142,12 +142,12 @@ public class PanelPrincipal extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				if (e.getSource() == anadirCat) {
 					anadirCat.setBounds(572, 100, 156, 40);
-					anadirCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
+					anadirCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
 					anadirCat.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 
 				} else if (e.getSource() == borrarCat) {
 					borrarCat.setBounds(572, 160, 156, 40);
-					borrarCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
+					borrarCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
 					borrarCat.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 				}
 			}
@@ -255,7 +255,7 @@ public class PanelPrincipal extends JFrame {
 			b.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
 			b.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			b.setBackground(new Color(Inicio.COLOR4));
-			b.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
+			b.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
 			b.setOpaque(true);
 			b.addActionListener(e);
 			b.addMouseListener(e);
