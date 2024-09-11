@@ -13,7 +13,7 @@
 # Piggy Bank
 Java Swing desktop application designed to help you visualize and manage your expenses effectively.
 <p align="center">
-    <img style="width:60%" src="https://github.com/RedondoDev/Piggy``Bank/blob/master/src/main/resources/readmeLogo2.png">
+    <img style="width:60%" src="https://github.com/RedondoDev/PiggyBank/blob/master/src/main/resources/readmeLogo2.png">
 </p>
 
 ## Table of Contents
