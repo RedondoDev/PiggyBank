@@ -211,7 +211,7 @@ public class PanelPrincipal extends JFrame {
 			borrarCat.setBounds(572, 160, 156, 40);
 			p.add(borrarCat);
 
-			salir = crearBotonImagen("src/main/resources/close.png", new EscuchaRaton());
+			salir = crearBotonImagen("src/main/resources/close.png", 25, 25, new EscuchaRaton());
 			salir.setBounds(767, 7, 24, 24);
 			p.add(salir);
 
@@ -231,19 +231,17 @@ public class PanelPrincipal extends JFrame {
 			textoMes.setBounds(92,170,180,40);
 			JLabel textoNombre = crearLabel("Javi", 0,18);		// Variables
 			textoNombre.setBounds(92,210,180,40);
-			botonIzq = crearBotonImagen("src/main/resources/close.png", new EscuchaRaton()); // Poner ruta buena
-			botonIzq.setBounds(70, 178, 30, 30);
+			botonIzq = crearBotonImagen("src/main/resources/leftArrow.png", 25, 20, new EscuchaRaton()); // Poner ruta buena
+			botonIzq.setBounds(73, 181, 25, 25);
 			botonIzq.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("Izquierda");
 				}
 			});
-			botonDer = crearBotonImagen("src/main/resources/close.png", new EscuchaRaton()); // Poner ruta buena
-			botonDer.setBounds(262, 178, 30, 30);
+			botonDer = crearBotonImagen("src/main/resources/rightArrow.png", 25, 20, new EscuchaRaton()); // Poner ruta buena
+			botonDer.setBounds(264, 181, 25, 25);
 			botonDer.addActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("Derecha");
@@ -282,10 +280,10 @@ public class PanelPrincipal extends JFrame {
 			return b;
 		}
 
-		private JButton crearBotonImagen(String rutaImagen, ActionListener a) {
+		private JButton crearBotonImagen(String rutaImagen, int width, int height, ActionListener a) {
 			JButton b = new JButton();
 			Image icono = new ImageIcon(rutaImagen).getImage();
-			ImageIcon exit = new ImageIcon(icono.getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+			ImageIcon exit = new ImageIcon(icono.getScaledInstance(width, height, Image.SCALE_SMOOTH));
 			b.setBorderPainted(false);
 			b.setFocusable(false);
 			b.setContentAreaFilled(false);
