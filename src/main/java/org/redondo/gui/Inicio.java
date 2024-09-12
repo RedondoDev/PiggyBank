@@ -211,7 +211,7 @@ public class Inicio extends JFrame {
 					String nombreUsuario = nombre.getText();
 					String contrasenaUsuario = String.valueOf(contrasena.getPassword());
 					errores = new ArrayList<String>();
-					errores = BaseDatos.signIn(errores, nombreUsuario, contrasenaUsuario); // tengo los errores
+					errores = BaseDatos.signIn(errores, nombreUsuario, contrasenaUsuario);
 					if (!nombreUsuario.isEmpty() && !contrasenaUsuario.isEmpty() && errores.isEmpty()) {
 						salir.requestFocusInWindow();
 						dispose();

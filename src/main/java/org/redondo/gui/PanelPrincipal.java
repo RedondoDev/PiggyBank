@@ -111,7 +111,7 @@ public class PanelPrincipal extends JFrame {
 	static class PanelGrid extends JPanel {
 
 		JPanel p1, p2;
-		JButton anadirCat, borrarCat, salir;
+		JButton anadirCat, borrarCat, salir, botonIzq, botonDer;
 
 		public PanelGrid() {
 			this.setLayout(new GridLayout(2, 1, 10, 10));
@@ -211,7 +211,7 @@ public class PanelPrincipal extends JFrame {
 			borrarCat.setBounds(572, 160, 156, 40);
 			p.add(borrarCat);
 
-			salir = crearBotonSalir(new EscuchaRaton());
+			salir = crearBotonImagen("src/main/resources/close.png", new EscuchaRaton());
 			salir.setBounds(767, 7, 24, 24);
 			p.add(salir);
 
@@ -231,9 +231,29 @@ public class PanelPrincipal extends JFrame {
 			textoMes.setBounds(92,170,180,40);
 			JLabel textoNombre = crearLabel("Javi", 0,18);		// Variables
 			textoNombre.setBounds(92,210,180,40);
+			botonIzq = crearBotonImagen("src/main/resources/close.png", new EscuchaRaton()); // Poner ruta buena
+			botonIzq.setBounds(70, 178, 30, 30);
+			botonIzq.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Izquierda");
+				}
+			});
+			botonDer = crearBotonImagen("src/main/resources/close.png", new EscuchaRaton()); // Poner ruta buena
+			botonDer.setBounds(262, 178, 30, 30);
+			botonDer.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Derecha");
+				}
+			});
 			p.add(textoIngresos);
 			p.add(textoGastos);
 			p.add(textoMes);
+			p.add(botonIzq);
+			p.add(botonDer);
 			p.add(textoNombre);
 			p.setOpaque(false);
 			return p;
@@ -262,11 +282,12 @@ public class PanelPrincipal extends JFrame {
 			return b;
 		}
 
-		private JButton crearBotonSalir(ActionListener a) {
+		private JButton crearBotonImagen(String rutaImagen, ActionListener a) {
 			JButton b = new JButton();
-			Image icono = new ImageIcon("src/main/resources/close.png").getImage();
+			Image icono = new ImageIcon(rutaImagen).getImage();
 			ImageIcon exit = new ImageIcon(icono.getScaledInstance(25, 25, Image.SCALE_SMOOTH));
 			b.setBorderPainted(false);
+			b.setFocusable(false);
 			b.setContentAreaFilled(false);
 			b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			b.setIcon(exit);
