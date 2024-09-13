@@ -29,7 +29,7 @@ public class PanelPrincipal extends JFrame {
 
 		MiFondo fondo = new MiFondo();
 		this.setContentPane(fondo);
-		fondo.setLayout(new GridLayout(1, 1)); // Para que ocupe el total
+		fondo.setLayout(new GridLayout(1, 1));
 
 		PanelGrid panelGrid = new PanelGrid(u);
 		fondo.add(panelGrid);
@@ -145,7 +145,6 @@ public class PanelPrincipal extends JFrame {
 					anadirCat.setBounds(572, 100, 156, 40);
 					anadirCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
 					anadirCat.setFont(new Font("Malgun Gothic", Font.BOLD, 17));
-
 				} else if (e.getSource() == borrarCat) {
 					borrarCat.setBounds(572, 160, 156, 40);
 					borrarCat.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
@@ -163,11 +162,7 @@ public class PanelPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == anadirCat) {
-					System.out.println("anadir");
-				} else if (e.getSource() == borrarCat) {
-					System.out.println("borrar");
-				} else if (e.getSource() == salir) {
+				if (e.getSource() == salir) {
 					System.exit(ABORT);
 				}
 			}
@@ -206,10 +201,23 @@ public class PanelPrincipal extends JFrame {
 
 			anadirCat = crearBoton("Añadir categoría", new EscuchaRaton());
 			anadirCat.setBounds(572, 100, 156, 40);
+			anadirCat.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Categoria c = new Categoria(u);
+					System.out.println("Añadida");
+				}
+			});
 			p.add(anadirCat);
 
 			borrarCat = crearBoton("Borrar categoría", new EscuchaRaton());
 			borrarCat.setBounds(572, 160, 156, 40);
+			borrarCat.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Borrada");
+				}
+			});
 			p.add(borrarCat);
 
 			salir = crearBotonImagen("src/main/resources/close.png", 25, 25, new EscuchaRaton());
@@ -236,9 +244,7 @@ public class PanelPrincipal extends JFrame {
 			botonIzq.setBounds(73, 181, 25, 25);
 			botonIzq.addActionListener(new ActionListener() {
 				@Override
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("Izquierda");
-				}
+				public void actionPerformed(ActionEvent e) {System.out.println("Izquierda");} // Abrir ventana cat
 			});
 			botonDer = crearBotonImagen("src/main/resources/rightArrow.png", 25, 20, new EscuchaRaton()); // Poner ruta buena
 			botonDer.setBounds(266, 181, 25, 25);
@@ -246,7 +252,7 @@ public class PanelPrincipal extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("Derecha");
-				}
+				}	// Abrir ventana cat
 			});
 			p.add(textoIngresos);
 			p.add(textoGastos);
