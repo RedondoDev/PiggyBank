@@ -240,7 +240,7 @@ public class PanelPrincipal extends JFrame {
 				}
 			});
 			botonDer = crearBotonImagen("src/main/resources/rightArrow.png", 25, 20, new EscuchaRaton()); // Poner ruta buena
-			botonDer.setBounds(264, 181, 25, 25);
+			botonDer.setBounds(266, 181, 25, 25);
 			botonDer.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

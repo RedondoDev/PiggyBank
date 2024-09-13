@@ -15,8 +15,6 @@ public class BaseDatos {
 	private static Connection c = conectar();
 
 	private static Connection conectar() {
-		PreparedStatement s = null;
-		ResultSet rs = null;
 		try {
 			c = DriverManager.getConnection(url);
 			System.out.println("Conectado correctamente");
@@ -108,10 +106,7 @@ public class BaseDatos {
 				min++;
 			}
 		}
-		if (may == 0 || min == 0) {
-			return false;
-		}
-		return true;
-	}
+        return may != 0 && min != 0;
+    }
 
 }
