@@ -11,30 +11,19 @@ import org.redondo.logica.Usuario;
 
 public class BaseDatos {
 
-	private static String url = "jdbc:mysql://localhost:3306/appgastos";
+	private static String url = "jdbc:sqlite:database.db";
 	private static Connection c = conectar();
 
 	private static Connection conectar() {
 		PreparedStatement s = null;
 		ResultSet rs = null;
 		try {
-			c = DriverManager.getConnection(url, "root", "123456");
-			String maxIdQuery = "SELECT MAX(id) FROM usuario";
-			s = c.prepareStatement(maxIdQuery);
-			rs = s.executeQuery();
-			int maxId = 0;
-			if (rs.next()) {
-				maxId = rs.getInt(1);
-			}
-			String incrementQuery = "ALTER TABLE usuario AUTO_INCREMENT = ?";
-			s = c.prepareStatement(incrementQuery);
-			s.setInt(1, maxId + 1);
-			s.executeUpdate();
-			return c;
+			c = DriverManager.getConnection(url);
+			System.out.println("Conectado correctamente");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return c;
 	}
 
 	public static Usuario logIn(String nombre, String contrasena) {
