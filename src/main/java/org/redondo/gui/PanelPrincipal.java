@@ -4,6 +4,7 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieSeries;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler;
+import org.redondo.logica.Usuario;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +15,7 @@ public class PanelPrincipal extends JFrame {
 
 	private Point coordenadasPinchar;
 
-	public PanelPrincipal() {
+	public PanelPrincipal(Usuario u) {
 
 		ImageIcon icono = new ImageIcon("src/main/resources/Piggy.png");
 
@@ -30,7 +31,7 @@ public class PanelPrincipal extends JFrame {
 		this.setContentPane(fondo);
 		fondo.setLayout(new GridLayout(1, 1)); // Para que ocupe el total
 
-		PanelGrid panelGrid = new PanelGrid();
+		PanelGrid panelGrid = new PanelGrid(u);
 		fondo.add(panelGrid);
 
 		addMouseListener(new MouseAdapter() {
@@ -113,13 +114,13 @@ public class PanelPrincipal extends JFrame {
 		JPanel p1, p2;
 		JButton anadirCat, borrarCat, salir, botonIzq, botonDer;
 
-		public PanelGrid() {
+		public PanelGrid(Usuario u) {
 			this.setLayout(new GridLayout(2, 1, 10, 10));
 			this.setOpaque(false);
 
-			p1 = crearPanel1();
+			p1 = crearPanel1(u);
 			this.add(p1);
-			p2 = crearPanel2();
+			p2 = crearPanel2(u);
 			this.add(p2);
 		}
 
@@ -173,7 +174,7 @@ public class PanelPrincipal extends JFrame {
 
 		}
 
-		private JPanel crearPanel1() {
+		private JPanel crearPanel1(Usuario u) {
 			JPanel p = new JPanel();
 			p.setLayout(null);
 
@@ -219,7 +220,7 @@ public class PanelPrincipal extends JFrame {
 			return p;
 		}
 
-		private JPanel crearPanel2() {
+		private JPanel crearPanel2(Usuario u) {
 			JPanel p = new JPanel();
 			p.setLayout(null);
 			p.setBounds(0,0,getWidth(),getHeight());
@@ -229,7 +230,7 @@ public class PanelPrincipal extends JFrame {
 			textoGastos.setBounds(82,90,200,35);
 			JLabel textoMes = crearLabel("Septiembre", 1,28);		// Variables
 			textoMes.setBounds(92,170,180,40);
-			JLabel textoNombre = crearLabel("Javi", 0,18);		// Variables
+			JLabel textoNombre = crearLabel(u.getNombre(), 0,18);		// Variables
 			textoNombre.setBounds(92,210,180,40);
 			botonIzq = crearBotonImagen("src/main/resources/leftArrow.png", 25, 20, new EscuchaRaton()); // Poner ruta buena
 			botonIzq.setBounds(73, 181, 25, 25);
@@ -293,10 +294,6 @@ public class PanelPrincipal extends JFrame {
 			return b;
 		}
 
-	}
-
-	public static void main(String[] args) {    // BORRAR
-		new PanelPrincipal();
 	}
 
 }

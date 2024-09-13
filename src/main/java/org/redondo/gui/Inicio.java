@@ -200,7 +200,7 @@ public class Inicio extends JFrame {
 					if (u != null) {
 						dispose();
 						System.out.println("Entraste");
-						PanelPrincipal panel = new PanelPrincipal(); //  SIGUIENTE VENTANA
+						PanelPrincipal panel = new PanelPrincipal(u); //  SIGUIENTE VENTANA
 					} else {
 						System.out.println("No existe");
 							nombre.setBackground(new Color(Inicio.ERROR));
