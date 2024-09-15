@@ -109,4 +109,22 @@ public class BaseDatos {
         return may != 0 && min != 0;
     }
 
+	public static boolean existeCategoria(String nombreCat) {
+	String buscarCoincidencia = "SELECT categoría FROM gastos WHERE categoría = ?";
+		PreparedStatement s;
+		try {
+			s = c.prepareStatement(buscarCoincidencia);
+			s.setString(1, nombreCat);
+			ResultSet rs = s.executeQuery();
+			if (rs != null) {
+				System.out.println("Coincide");
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("No coincide");
+		return false;
+    }
+
 }

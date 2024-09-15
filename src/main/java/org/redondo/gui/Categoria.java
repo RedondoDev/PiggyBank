@@ -1,5 +1,7 @@
 package org.redondo.gui;
 
+import org.junit.jupiter.api.parallel.Resources;
+import org.redondo.bd.BaseDatos;
 import org.redondo.logica.Usuario;
 
 import javax.swing.*;
@@ -64,7 +66,7 @@ public class Categoria extends JFrame {
 
     class MiPanel extends JPanel {
 
-        JLabel labelGradiente, textoNom;
+        JLabel labelGradiente, textoNom, textoError;
         JTextField nombre;
         JButton anadir, salir;
         boolean datosCorrectos;
@@ -104,6 +106,12 @@ public class Categoria extends JFrame {
             });
             this.add(nombre);
 
+            textoError = new JLabel("Nombre de categoría utilizado");
+            textoError.setForeground(new Color(Inicio.ERROR));
+            textoError.setBounds(60,80,170,20);
+            textoError.setVisible(false);
+            this.add(textoError);
+
             anadir = crearBoton("Añadir", new escuchaRaton()); // ARREGLAR HOVER
             anadir.setBounds(90, 100, 100, 35);
             anadir.addActionListener(new ActionListener() {
@@ -111,9 +119,18 @@ public class Categoria extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     if (e.getSource() == anadir) {
                         intento = true;
-                        if (nombre.getText().equals("")) {
+                        boolean existe = false;
+                            existe = BaseDatos.existeCategoria(nombre.getText());   // AÑADIR EN BD Y VER SI FUNCIONA
+                        if (nombre.getText().isEmpty()) {
                             nombre.setBackground(new Color(Inicio.ERROR));
                             salir.requestFocusInWindow();
+                        } else if (existe) {
+                            System.out.println("Añadido");
+                            textoError.setVisible(true);
+                            salir.requestFocusInWindow();
+                            repaint();
+                        } else {
+
                         }
                     }
                 }
@@ -168,7 +185,8 @@ public class Categoria extends JFrame {
             public void focusGained(FocusEvent e) {
                 if ((e.getSource() == nombre)) {
                     nombre.setBackground(new Color(Inicio.COLOR1));
-                    intento = false;    // Aquí o fuera del if?
+                    intento = false;
+                    textoError.setVisible(false);
                 }
             }
 
