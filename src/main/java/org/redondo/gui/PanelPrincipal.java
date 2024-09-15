@@ -204,7 +204,7 @@ public class PanelPrincipal extends JFrame {
 			anadirCat.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Categoria c = new Categoria(u);
+					Categoria c = new Categoria(p, u);
 					System.out.println("Añadida");
 				}
 			});

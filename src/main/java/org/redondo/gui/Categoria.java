@@ -25,7 +25,7 @@ public class Categoria extends JFrame {
 
     public static ErrorV ventanaError;
 
-    public Categoria(Usuario u) {
+    public Categoria(JPanel p, Usuario u) {
 
         ImageIcon icono = new ImageIcon("src/main/resources/Piggy.png");
 
@@ -33,12 +33,12 @@ public class Categoria extends JFrame {
         this.setIconImage(icono.getImage());
         this.setTitle("Piggy Bank");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(295, 160);
+        this.setSize(295, 155);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.getRootPane().setBorder(new LineBorder(Color.WHITE,3));
 
-        MiPanel panel = new MiPanel(u);
+        MiPanel panel = new MiPanel(p, u);
         this.add(panel);
 
         addMouseListener(new MouseAdapter() {
@@ -70,7 +70,7 @@ public class Categoria extends JFrame {
         boolean datosCorrectos;
         static ArrayList<String> errores = new ArrayList<String>();
 
-        public MiPanel(Usuario u) {
+        public MiPanel(JPanel p, Usuario u) {
             this.setLayout(null);
 
             textoNom = crearTexto("Nombre");
@@ -78,7 +78,7 @@ public class Categoria extends JFrame {
             this.add(textoNom);
 
             nombre = crearCampoTexto(new escuchaRaton());
-            nombre.setBounds(34, 47, 225, 37);
+            nombre.setBounds(34, 47, 225, 35);
             nombre.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -105,7 +105,7 @@ public class Categoria extends JFrame {
             this.add(nombre);
 
             anadir = crearBoton("Añadir", new escuchaRaton()); // ARREGLAR HOVER
-            anadir.setBounds(80,100,120,35);
+            anadir.setBounds(90,100,100,35);
             this.add(anadir);
 
             salir = crearBotonSalir();
@@ -114,7 +114,8 @@ public class Categoria extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (e.getSource() == salir) {
-                        System.exit(ABORT);
+                        dispose();
+                        p.repaint();    // Se repinta el chart
                     }
                 }
             });
@@ -122,13 +123,11 @@ public class Categoria extends JFrame {
 
             labelGradiente = new JLabel();
             labelGradiente.setBounds(0, 0, 350, 400);
-            Image gradiente = new ImageIcon("src/main/resources/gradient.png").getImage();
-            labelGradiente.setIcon(new ImageIcon((gradiente)));
-            labelGradiente.setOpaque(false); // IMPORTANTE dejarlo transparente
+            labelGradiente.setBackground(new Color(0xFFE8E0));
+            labelGradiente.setOpaque(true); // IMPORTANTE dejarlo transparente
             this.add(labelGradiente);
 
             this.setOpaque(false);
-
 
         }
 
@@ -138,7 +137,7 @@ public class Categoria extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 if (e.getSource() == anadir) {
-                    anadir.setBounds(77,97,127,42);
+                    anadir.setBounds(87,97,107,42);
                     anadir.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
                     anadir.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
                 }
@@ -147,7 +146,7 @@ public class Categoria extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 if (e.getSource() == anadir) {
-                    anadir.setBounds(80,100,120,35);
+                    anadir.setBounds(90,100,100,35);
                     anadir.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR4), 2));
                     anadir.setFont(new Font("Malgun Gothic", Font.BOLD, 15));
                 }
@@ -171,7 +170,7 @@ public class Categoria extends JFrame {
 
     private JLabel crearTexto(String texto) {
         JLabel l = new JLabel(texto);
-        l.setFont(new Font("Malgun Gothic", Font.PLAIN, 20));
+        l.setFont(new Font("Malgun Gothic", Font.PLAIN, 18));
         l.setForeground(new Color(Inicio.COLOR5));
         return l;
     }
