@@ -36,7 +36,7 @@ public class Categoria extends JFrame {
         this.setSize(295, 155);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.getRootPane().setBorder(new LineBorder(Color.WHITE,3));
+        this.getRootPane().setBorder(new LineBorder(Color.WHITE, 3));
 
         MiPanel panel = new MiPanel(p, u);
         this.add(panel);
@@ -105,7 +105,19 @@ public class Categoria extends JFrame {
             this.add(nombre);
 
             anadir = crearBoton("Añadir", new escuchaRaton()); // ARREGLAR HOVER
-            anadir.setBounds(90,100,100,35);
+            anadir.setBounds(90, 100, 100, 35);
+            anadir.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getSource() == anadir) {
+                        intento = true;
+                        if (nombre.getText().equals("")) {
+                            nombre.setBackground(new Color(Inicio.ERROR));
+                            salir.requestFocusInWindow();
+                        }
+                    }
+                }
+            });
             this.add(anadir);
 
             salir = crearBotonSalir();
@@ -137,7 +149,7 @@ public class Categoria extends JFrame {
             @Override
             public void mouseEntered(MouseEvent e) {
                 if (e.getSource() == anadir) {
-                    anadir.setBounds(87,97,107,42);
+                    anadir.setBounds(87, 97, 107, 42);
                     anadir.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 1));
                     anadir.setFont(new Font("Malgun Gothic", Font.BOLD, 16));
                 }
@@ -146,7 +158,7 @@ public class Categoria extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 if (e.getSource() == anadir) {
-                    anadir.setBounds(90,100,100,35);
+                    anadir.setBounds(90, 100, 100, 35);
                     anadir.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR4), 2));
                     anadir.setFont(new Font("Malgun Gothic", Font.BOLD, 15));
                 }
@@ -154,10 +166,10 @@ public class Categoria extends JFrame {
 
             @Override
             public void focusGained(FocusEvent e) {
-                if ((e.getSource() == nombre) && !datosCorrectos && intento) {
+                if ((e.getSource() == nombre)) {
                     nombre.setBackground(new Color(Inicio.COLOR1));
+                    intento = false;    // Aquí o fuera del if?
                 }
-                intento = false;
             }
 
             @Override
