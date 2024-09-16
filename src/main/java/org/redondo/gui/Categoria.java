@@ -81,57 +81,35 @@ public class Categoria extends JFrame {
 
             nombre = crearCampoTexto(new escuchaRaton());
             nombre.setBounds(34, 47, 225, 35);
-            nombre.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (e.getSource() == anadir) {
-                        intento = true;
-                        String nombreCat = nombre.getText();
-                        // u = BaseDatos.verificarNombreCat(nombreCat); HACER QUERY METER CAT
-                        datosCorrectos = (u != null);
-                        salir.requestFocusInWindow();
-                        if (datosCorrectos) {
-                            dispose();
-                            System.out.println("Categoría añadida con éxito");
-                            PanelPrincipal panel = new PanelPrincipal(u); //  SIGUIENTE VENTANA
-                        } else if (!datosCorrectos) {
-                            ventanaError = new ErrorV(errores);
-                            System.out.println("Nombre de categoría vacío o usado.");
-                            nombre.setBackground(new Color(Inicio.ERROR));
-                        }
-                    } else {
-                        System.exit(ABORT);
-                    }
-                }
-            });
             this.add(nombre);
 
             textoError = new JLabel("Nombre de categoría utilizado");
             textoError.setForeground(new Color(Inicio.ERROR));
-            textoError.setBounds(60,80,170,20);
+            textoError.setBounds(60, 80, 170, 20);
             textoError.setVisible(false);
             this.add(textoError);
 
-            anadir = crearBoton("Añadir", new escuchaRaton()); // ARREGLAR HOVER
+            anadir = crearBoton("Añadir", new escuchaRaton());
             anadir.setBounds(90, 100, 100, 35);
             anadir.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (e.getSource() == anadir) {
                         intento = true;
-                        boolean existe = false;
-                            existe = BaseDatos.existeCategoria(nombre.getText());   // AÑADIR EN BD Y VER SI FUNCIONA
+                        boolean existe;
+                        existe = BaseDatos.existeCategoria(nombre.getText().trim(), u);
                         if (nombre.getText().isEmpty()) {
                             nombre.setBackground(new Color(Inicio.ERROR));
                             salir.requestFocusInWindow();
                         } else if (existe) {
-                            System.out.println("Añadido");
                             textoError.setVisible(true);
                             salir.requestFocusInWindow();
-                            repaint();
                         } else {
-
+                            BaseDatos.anadirCategoria(nombre.getText().trim(), u);
+                            System.out.println("Categoría añadida exitosamente");
+                            dispose();
                         }
+                        repaint();
                     }
                 }
             });

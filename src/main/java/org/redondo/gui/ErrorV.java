@@ -21,100 +21,100 @@ import javax.swing.SwingConstants;
 
 public class ErrorV extends JFrame {
 
-	private Point coordenadasPinchar;
-	public static boolean abierta;
+    private Point coordenadasPinchar;
+    public static boolean abierta;
 
-	public ErrorV(ArrayList<String> errores) {
+    public ErrorV(ArrayList<String> errores) {
 
-		abierta = true;
-		ImageIcon icono = new ImageIcon("src/main/resources/Piggy.png");
+        abierta = true;
+        ImageIcon icono = new ImageIcon("src/main/resources/Piggy.png");
 
-		this.setUndecorated(true);
-		this.setIconImage(icono.getImage());
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setSize(430, 160);
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
+        this.setUndecorated(true);
+        this.setIconImage(icono.getImage());
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setSize(430, 160);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
 
-		PanelError panelError = new PanelError(errores);
-		this.add(panelError);
+        PanelError panelError = new PanelError(errores);
+        this.add(panelError);
 
-		this.setVisible(true);
+        this.setVisible(true);
 
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				coordenadasPinchar = e.getPoint();
-			}
-		});
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                coordenadasPinchar = e.getPoint();
+            }
+        });
 
-		addMouseMotionListener(new MouseAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				int x = e.getXOnScreen() - coordenadasPinchar.x;
-				int y = e.getYOnScreen() - coordenadasPinchar.y;
-				setLocation(x, y);
-			}
-		});
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getXOnScreen() - coordenadasPinchar.x;
+                int y = e.getYOnScreen() - coordenadasPinchar.y;
+                setLocation(x, y);
+            }
+        });
 
-	}
+    }
 
-	class PanelError extends JPanel {
+    class PanelError extends JPanel {
 
-		JButton salir;
+        JButton salir;
 
-		public PanelError(ArrayList<String> errores) {
+        public PanelError(ArrayList<String> errores) {
 
-			this.setLayout(null);
-			this.setBackground(new Color(Inicio.COLOR4));
-			this.setSize(430, 150);
-			this.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
+            this.setLayout(null);
+            this.setBackground(new Color(Inicio.COLOR4));
+            this.setSize(430, 150);
+            this.setBorder(BorderFactory.createLineBorder(new Color(Inicio.COLOR1), 2));
 
-			JPanel panelGrid = new JPanel();
-			panelGrid.setBounds(50, 30, 330, 100);
-			panelGrid.setLayout(new GridLayout(errores.size(), 1));
-			panelGrid.setBackground(new Color(Inicio.COLOR4));
-			for (String e : errores) {
-				JLabel error = new JLabel(e);
-				error.setHorizontalAlignment(SwingConstants.CENTER);
-				panelGrid.add(error);
-			}
-			this.add(panelGrid);
+            JPanel panelGrid = new JPanel();
+            panelGrid.setBounds(50, 30, 330, 100);
+            panelGrid.setLayout(new GridLayout(errores.size(), 1));
+            panelGrid.setBackground(new Color(Inicio.COLOR4));
+            for (String e : errores) {
+                JLabel error = new JLabel(e);
+                error.setHorizontalAlignment(SwingConstants.CENTER);
+                panelGrid.add(error);
+            }
+            this.add(panelGrid);
 
-			salir = crearBotonSalir(new escuchaRaton());
-			salir.setBounds(399, 5, 25, 25);
-			this.add(salir);
+            salir = crearBotonSalir(new escuchaRaton());
+            salir.setBounds(399, 5, 25, 25);
+            this.add(salir);
 
-			errores.clear();
+            errores.clear();
 
-			this.setOpaque(true);
-		}
+            this.setOpaque(true);
+        }
 
-		class escuchaRaton extends MouseAdapter implements ActionListener {
+        class escuchaRaton extends MouseAdapter implements ActionListener {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == salir) {
-					ErrorV.this.dispose();
-				}
-			}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == salir) {
+                    ErrorV.this.dispose();
+                }
+            }
 
-		}
+        }
 
-	}
+    }
 
-	private JButton crearBotonSalir(ActionListener a) {
-		JButton b = new JButton();
-		Image icono = new ImageIcon("src/main/resources/close.png").getImage();
-		ImageIcon exit = new ImageIcon(icono.getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+    private JButton crearBotonSalir(ActionListener a) {
+        JButton b = new JButton();
+        Image icono = new ImageIcon("src/main/resources/close.png").getImage();
+        ImageIcon exit = new ImageIcon(icono.getScaledInstance(25, 25, Image.SCALE_SMOOTH));
 
-		b.setIcon(exit);
-		b.setSize(30, 30);
-		b.setBorder(BorderFactory.createEmptyBorder());
-		b.setContentAreaFilled(false);
-		b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		b.addActionListener(a);
-		return b;
-	}
+        b.setIcon(exit);
+        b.setSize(30, 30);
+        b.setBorder(BorderFactory.createEmptyBorder());
+        b.setContentAreaFilled(false);
+        b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        b.addActionListener(a);
+        return b;
+    }
 
 }
