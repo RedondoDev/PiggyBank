@@ -119,7 +119,6 @@ public class BaseDatos {
             s.setInt(2, u.getId());
             ResultSet rs = s.executeQuery();
             if (rs.next()) {
-                System.out.println("Como?");
                 return true;
             }
         } catch (SQLException e) {
@@ -141,6 +140,25 @@ public class BaseDatos {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<String> categoriasExistentes(Usuario u, ArrayList<String> categorias) {
+        String buscarCoincidencia = "SELECT categoría FROM gastos WHERE id_usuario = ?";
+        PreparedStatement s;
+        try {
+            s = c.prepareStatement(buscarCoincidencia);
+            s.setInt(1, u.getId());
+            ResultSet rs = s.executeQuery();
+            while (rs.next()) {
+                categorias.add(rs.getString("categoría"));
+            }
+            for(String c : categorias) {
+            System.out.println(c);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categorias;
     }
 
 }

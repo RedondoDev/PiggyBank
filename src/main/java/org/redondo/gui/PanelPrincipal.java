@@ -4,10 +4,12 @@ import org.knowm.xchart.PieChart;
 import org.knowm.xchart.PieSeries;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.style.Styler;
+import org.redondo.bd.BaseDatos;
 import org.redondo.logica.Usuario;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -114,6 +116,7 @@ public class PanelPrincipal extends JFrame {
     static class PanelGrid extends JPanel {
 
         JPanel p1, p2;
+        ArrayList<String> categorias = new ArrayList<String>();
         JButton anadirCat, borrarCat, salir, botonIzq, botonDer;
 
         public PanelGrid(Usuario u) {
@@ -124,6 +127,8 @@ public class PanelPrincipal extends JFrame {
             this.add(p1);
             p2 = crearPanel2(u);
             this.add(p2);
+
+            repaint();
         }
 
         class EscuchaRaton extends MouseAdapter implements FocusListener, ActionListener {
@@ -177,10 +182,16 @@ public class PanelPrincipal extends JFrame {
 
             PieChart pie = new PieChart(getWidth(), getHeight(), Styler.ChartTheme.XChart);
             pie.getStyler().setChartBackgroundColor(new Color(255, 255, 255, 0));
-            pie.addSeries("Sueldo", 10);
-            pie.addSeries("Alquiler", 10);
-            pie.addSeries("Comida", 10);
-            pie.addSeries("Ocio", 10);
+            BaseDatos.categoriasExistentes(u, categorias);
+            for (int i = 0; i < categorias.size(); i++) {
+                pie.removeSeries(categorias.get(i));
+            }
+            pie.addSeries("Ingresos", 10);
+            for (int i = 0; i < categorias.size(); i++) {
+                if (!pie.getSeriesMap().containsKey(categorias.get(i))) {
+                    pie.addSeries(categorias.get(i), 10);
+                }
+            }
             pie.getStyler().setPlotContentSize(0.9);
             pie.getStyler().setChartPadding(20);
             pie.getStyler().setPlotBackgroundColor(null);
